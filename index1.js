@@ -697,8 +697,10 @@ function Blob(b, d, e, g) {
     (this.drawSimpleBody = function (s, u) {
       for (q = 0; q < this.sticks.length; q++) this.sticks[q].draw(s, u);
     }),
+    (this.changeColorCube = function (s, color) {
+      s.fillStyle = color;
+    }),
     (this.drawCube = function (s, u) {
-      //   console.log(this.middlePointMass.cur.x * u * this.radius + 80);
       var x_pos = this.middlePointMass.cur.x * u + this.radius * 145;
       var y_pos = this.middlePointMass.cur.y * u + this.radius * -180;
       var x_pos_1 = this.middlePointMass.cur.x * u + this.radius * -155;
@@ -753,12 +755,13 @@ function Blob(b, d, e, g) {
 
       //   console.log(this.radius);
     }),
-    (this.draw = function (s, u) {
+    (this.draw = function (s, u, color) {
       var A, B, C;
       // this.drawBody(s, u),
       this.drawCube(s, u),
+        this.changeColorCube(s, color),
         (s.strokeStyle = "#000000"),
-        (s.fillStyle = "#FFFFFF"),
+        // (s.fillStyle = "#FFFFFF"),
         s.save(),
         s.translate(
           this.middlePointMass.getXPos() * u,
@@ -914,10 +917,10 @@ function BlobCollective(b, d, e, g) {
           this.tmpForce.setY(k.getY() * (0.75 * Math.random() + 0.25)),
           this.blobs[l].addForce(this.tmpForce));
     }),
-    (this.draw = function (k, l) {
+    (this.draw = function (k, l, color = "#FFFFFF") {
       var m;
       for (m = 0; m < this.blobs.length; m++)
-        null != this.blobs[m] && this.blobs[m].draw(k, l);
+        null != this.blobs[m] && this.blobs[m].draw(k, l, color);
     });
 }
 
@@ -933,6 +936,15 @@ var env,
   stopped,
   savedMouseCoords = null,
   selectOffset = null;
+var randomColor = [
+  "#FF5733",
+  "#C39BD3",
+  "#85C1E9",
+  "#76D7C4",
+  "#F7DC6F",
+  "#85929E",
+];
+var random_idx = Math.floor(Math.random() * 6);
 
 function update() {
   null != savedMouseCoords &&
@@ -952,7 +964,7 @@ function draw() {
     var d = b.getContext("2d");
     d.clearRect(0, 0, width, height),
       env.draw(d, scaleFactor),
-      blobColl.draw(d, scaleFactor);
+      blobColl.draw(d, scaleFactor, randomColor[random_idx]);
   }
 }
 
