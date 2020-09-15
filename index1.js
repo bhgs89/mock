@@ -280,14 +280,17 @@ function Blob(b, d, e, g) {
     }, this.changeColorCube = function (s, color) {
         s.fillStyle = this.color;
     }, this.drawCube = function (s, u) {
-      var x_pos = this.middlePointMass.cur.x * u + this.radius * 145;
+      var x_pos = this.middlePointMass.cur.x * u + this.radius * 125;
       var y_pos = this.middlePointMass.cur.y * u + this.radius * -180;
-      var x_pos_1 = this.middlePointMass.cur.x * u + this.radius * -155;
+
+      var x_pos_1 = this.middlePointMass.cur.x * u + this.radius * -125;
       var y_pos_1 = this.middlePointMass.cur.y * u + this.radius * -180;
-      var x_pos_2 = this.middlePointMass.cur.x * u + this.radius * -155;
-      var y_pos_2 = this.middlePointMass.cur.y * u + this.radius * +120;
-      var x_pos_3 = this.middlePointMass.cur.x * u + this.radius * 145;
-      var y_pos_3 = this.middlePointMass.cur.y * u + this.radius * +120;
+
+      var x_pos_2 = this.middlePointMass.cur.x * u + this.radius * -125;
+      var y_pos_2 = this.middlePointMass.cur.y * u + this.radius * +55;
+
+      var x_pos_3 = this.middlePointMass.cur.x * u + this.radius * 125;
+      var y_pos_3 = this.middlePointMass.cur.y * u + this.radius * +55;
 
       s.beginPath();
       s.moveTo(x_pos, y_pos);
@@ -298,13 +301,16 @@ function Blob(b, d, e, g) {
       s.stroke();
       s.fill();
 
-      var x_pos_4 = this.middlePointMass.cur.x * u + this.radius * 145;
-      var y_pos_4 = this.middlePointMass.cur.y * u + this.radius * +120;
-      var x_pos_5 = this.middlePointMass.cur.x * u + this.radius * 185;
-      var y_pos_5 = this.middlePointMass.cur.y * u + this.radius * +100;
-      var x_pos_6 = this.middlePointMass.cur.x * u + this.radius * 185;
-      var y_pos_6 = this.middlePointMass.cur.y * u + this.radius * -200;
-      var x_pos_7 = this.middlePointMass.cur.x * u + this.radius * 145;
+      var x_pos_4 = this.middlePointMass.cur.x * u + this.radius * -125;
+      var y_pos_4 = this.middlePointMass.cur.y * u + this.radius * -180;
+
+      var x_pos_5 = this.middlePointMass.cur.x * u + this.radius * -45;
+      var y_pos_5 = this.middlePointMass.cur.y * u + this.radius * -250;
+
+      var x_pos_6 = this.middlePointMass.cur.x * u + this.radius * 205;
+      var y_pos_6 = this.middlePointMass.cur.y * u + this.radius * -250;
+
+      var x_pos_7 = this.middlePointMass.cur.x * u + this.radius * 125;
       var y_pos_7 = this.middlePointMass.cur.y * u + this.radius * -180;
 
       s.beginPath();
@@ -315,13 +321,16 @@ function Blob(b, d, e, g) {
       s.stroke();
       s.fill();
 
-      var x_pos_8 = this.middlePointMass.cur.x * u + this.radius * 185;
-      var y_pos_8 = this.middlePointMass.cur.y * u + this.radius * -200;
-      var x_pos_9 = this.middlePointMass.cur.x * u + this.radius * -115;
-      var y_pos_9 = this.middlePointMass.cur.y * u + this.radius * -200;
-      var x_pos_10 = this.middlePointMass.cur.x * u + this.radius * -155;
-      var y_pos_10 = this.middlePointMass.cur.y * u + this.radius * -180;
-      var x_pos_11 = this.middlePointMass.cur.x * u + this.radius * 145;
+      var x_pos_8 = this.middlePointMass.cur.x * u + this.radius * 205;
+      var y_pos_8 = this.middlePointMass.cur.y * u + this.radius * -250;
+
+      var x_pos_9 = this.middlePointMass.cur.x * u + this.radius * 205;
+      var y_pos_9 = this.middlePointMass.cur.y * u + this.radius * -15;
+
+      var x_pos_10 = this.middlePointMass.cur.x * u + this.radius * 125;
+      var y_pos_10 = this.middlePointMass.cur.y * u + this.radius * 55;
+
+      var x_pos_11 = this.middlePointMass.cur.x * u + this.radius * 125;
       var y_pos_11 = this.middlePointMass.cur.y * u + this.radius * -180;
 
       s.beginPath();
@@ -398,7 +407,7 @@ function Blob(b, d, e, g) {
       s.fill();
     }, this.draw = function(s, u) {
         var A, B, C;
-        /*this.drawBody(s, u), this.drawCube(s, u),*/this.drawBirdEyeView(s, u), this.changeColorCube(s), s.strokeStyle = '#000000',/*s.fillStyle = '#000000',*/ s.save(), s.translate(this.middlePointMass.getXPos() * u, (this.middlePointMass.getYPos() - 0.35 * this.radius) * u), A = new Vector(0, -1), B = new Vector(0, 0), B.set(this.pointMasses[0].getPos()), B.sub(this.middlePointMass.getPos()), C = Math.acos(B.dotProd(A) / B.length()), 0 > B.getX() ? s.rotate(-C) : s.rotate(C), this.drawFace(s, u), s.restore()
+        /*this.drawBody(s, u), this.drawBirdEyeView(s, u),*/this.drawCube(s, u), this.changeColorCube(s), s.strokeStyle = '#000000',/*s.fillStyle = '#000000',*/ s.save(), s.translate(this.middlePointMass.getXPos() * u, (this.middlePointMass.getYPos() - 0.35 * this.radius) * u), A = new Vector(0, -1), B = new Vector(0, 0), B.set(this.pointMasses[0].getPos()), B.sub(this.middlePointMass.getPos()), C = Math.acos(B.dotProd(A) / B.length()), 0 > B.getX() ? s.rotate(-C) : s.rotate(C), this.drawFace(s, u), s.restore()
     }
 }
 
