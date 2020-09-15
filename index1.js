@@ -70,14 +70,26 @@ function Vector(b, d) {
 }
 
 function Environment(b, d, e, g) {
-    this.left = b, this.right = b + e, this.top = d, this.buttom = d + g, this.r = new Vector(0, 0), this.collision = function(k) {
+    this.left = b, 
+    this.right = b + e, 
+    this.top = d, 
+    this.buttom = d + g, 
+    this.r = new Vector(0, 0), 
+    this.collision = function(k) {
         var m = !1;
         return k.getX() < this.left ? (k.setX(this.left), m = !0) : k.getX() > this.right && (k.setX(this.right), m = !0), k.getY() < this.top ? (k.setY(this.top), m = !0) : k.getY() > this.buttom && (k.setY(this.buttom), m = !0), m
-    }, this.draw = function() {}
+    }, 
+    this.draw = function() {}
 }
 
 function PointMass(b, d, e) {
-    this.cur = new Vector(b, d), this.prev = new Vector(b, d), this.mass = e, this.force = new Vector(0, 0), this.result = new Vector(0, 0), this.friction = 0.01, this.getXPos = function() {
+    this.cur = new Vector(b, d), 
+    this.prev = new Vector(b, d), 
+    this.mass = e, 
+    this.force = new Vector(0, 0), 
+    this.result = new Vector(0, 0), 
+    this.friction = 0.01, 
+    this.getXPos = function() {
         return this.cur.getX()
     }, this.getYPos = function() {
         return this.cur.getY()
@@ -192,13 +204,36 @@ function Blob(b, d, e, g) {
     function k(s, u) {
         return s += u, s % u
     }
-    this.x = b, this.y = d, this.sticks = [], this.pointMasses = [], this.joints = [], this.middlePointMass, this.radius = e, this.drawFaceStyle = 1, this.drawEyeStyle = 1, this.selected = !1, g = 8;
+    this.x = b, 
+    this.y = d, 
+    this.sticks = [], 
+    this.pointMasses = [], 
+    this.joints = [], 
+    this.middlePointMass, 
+    this.radius = e, 
+    this.drawFaceStyle = 1, 
+    this.drawEyeStyle = 1, 
+    this.selected = !1, 
+    g = 8;
     var m = 0.95
         , n = 1.05
         , o, q, r;
-    for (q = 0, o = 0; q < g; q++) this.pointMasses[q] = new PointMass(Math.cos(o) * e + b, Math.sin(o) * e + d, 1), o += 2 * Math.PI / g;
-    for (this.middlePointMass = new PointMass(b, d, 1), this.pointMasses[0].setMass(4), this.pointMasses[1].setMass(4), q = 0; q < g; q++) this.sticks[q] = new Stick(this.pointMasses[q], this.pointMasses[k(q + 1, g)]);
-    for (q = 0, r = 0; q < g; q++) this.joints[r++] = new Joint(this.pointMasses[q], this.pointMasses[k(q + g / 2 + 1, g)], m, n), this.joints[r++] = new Joint(this.pointMasses[q], this.middlePointMass, 0.9 * n, 1.1 * m);
+    for (q = 0, o = 0; q < g; q++) {
+        this.pointMasses[q] = new PointMass(Math.cos(o) * e + b, Math.sin(o) * e + d, 1), 
+        o += 2 * Math.PI / g;
+    }        
+    for (this.middlePointMass = new PointMass(b, d, 1), this.pointMasses[0].setMass(4), this.pointMasses[1].setMass(4), q = 0; q < g; q++) {
+        this.sticks[q] = new Stick(this.pointMasses[q], 
+        this.pointMasses[k(q + 1, g)]);
+    }
+    for (q = 0, r = 0; q < g; q++) {
+        this.joints[r++] = new Joint(this.pointMasses[q], 
+        this.pointMasses[k(q + g / 2 + 1, g)], m, n), 
+        this.joints[r++] = new Joint(
+            this.pointMasses[q], 
+            this.middlePointMass, 0.9 * n, 1.1 * m
+        );
+    }
     this.addBlob = function(s) {
         var u = this.joints.length
             , z;
@@ -260,20 +295,110 @@ function Blob(b, d, e, g) {
     }, this.drawBody = function(s, u) {
         var z;
         for (s.strokeStyle = '#000000', s.fillStyle = !0 == this.selected ? '#CCFFCC' : '#FFFFFF', s.lineWidth = 5, s.beginPath(), s.moveTo(this.pointMasses[0].getXPos() * u, this.pointMasses[0].getYPos() * u), z = 0; z < this.pointMasses.length; z++) {
+            var x_pos = this.pointMasses[0].getXPos() * u;
+            var y_pos = this.pointMasses[0].getYPos() * u;
+
             var A, B, C, D, E, F, G, H, I, J, K, L;
-            I = this.getPointMass(z - 1), J = this.pointMasses[z], K = this.getPointMass(z + 1), L = this.getPointMass(z + 2), E = K.getXPos(), F = K.getYPos(), G = J.getXPos(), H = J.getYPos(), A = 0.5 * G + 0.5 * E, B = 0.5 * H + 0.5 * F, C = G - I.getXPos() + E - L.getXPos(), D = H - I.getYPos() + F - L.getYPos(), A += 0.16 * C, B += 0.16 * D, A *= u, B *= u, E *= u, F *= u, s.bezierCurveTo(A, B, E, F, E, F)
-        }
-        s.closePath(), s.stroke(), s.fill()
+            I = this.getPointMass(z - 1), 
+            J = this.pointMasses[z], 
+            K = this.getPointMass(z + 1), 
+            L = this.getPointMass(z + 2), 
+            E = K.getXPos(), 
+            F = K.getYPos(), 
+            G = J.getXPos(), 
+            H = J.getYPos(), 
+            A = 0.5 * G + 0.5 * E, 
+            B = 0.5 * H + 0.5 * F, 
+            C = G - I.getXPos() + E - L.getXPos(), 
+            D = H - I.getYPos() + F - L.getYPos(), 
+            A += 0.16 * C, 
+            B += 0.16 * D, 
+            A *= u, 
+            B *= u, 
+            E *= u, 
+            F *= u, 
+            s.bezierCurveTo(A, B, E, F, E, F)
+        } s.closePath(), s.stroke(), s.fill() 
     }, this.drawSimpleBody = function(s, u) {
         for (q = 0; q < this.sticks.length; q++) this.sticks[q].draw(s, u)
+    }, this.drawCube = function(s, u) {        
+        var x_pos = this.middlePointMass.cur.x * u + 80;
+        var y_pos = this.middlePointMass.cur.y * u - 80;
+        var x_pos_1 = this.middlePointMass.cur.x * u - 80;
+        var y_pos_1 = this.middlePointMass.cur.y * u - 80;
+        var x_pos_2 = this.middlePointMass.cur.x * u - 80;
+        var y_pos_2 = this.middlePointMass.cur.y * u + 70;
+        var x_pos_3 = this.middlePointMass.cur.x * u + 80;
+        var y_pos_3 = this.middlePointMass.cur.y * u + 70;
+
+        s.beginPath();
+        s.moveTo(x_pos, y_pos);
+        s.lineTo(x_pos_1, y_pos_1);
+        s.lineTo(x_pos_2, y_pos_2);
+        s.lineTo(x_pos_3, y_pos_3);
+        s.closePath();
+        s.stroke();
+        s.fill();
+
+        var x_pos_4 = this.middlePointMass.cur.x * u + 80;
+        var y_pos_4 = this.middlePointMass.cur.y * u + 70;
+        var x_pos_5 = this.middlePointMass.cur.x * u + 90;
+        var y_pos_5 = this.middlePointMass.cur.y * u + 60;
+        var x_pos_6 = this.middlePointMass.cur.x * u + 90;
+        var y_pos_6 = this.middlePointMass.cur.y * u - 90;
+        var x_pos_7 = this.middlePointMass.cur.x * u + 80;
+        var y_pos_7 = this.middlePointMass.cur.y * u - 80;
+
+        s.beginPath();
+        s.moveTo(x_pos_4, y_pos_4);
+        s.lineTo(x_pos_5, y_pos_5);
+        s.lineTo(x_pos_6, y_pos_6);
+        s.lineTo(x_pos_7, y_pos_7);        
+        s.stroke();
+        s.fill();
+
+        var x_pos_8 = this.middlePointMass.cur.x * u + 90;
+        var y_pos_8 = this.middlePointMass.cur.y * u - 90;
+        var x_pos_9 = this.middlePointMass.cur.x * u - 70;
+        var y_pos_9 = this.middlePointMass.cur.y * u - 90;
+        var x_pos_10 = this.middlePointMass.cur.x * u - 80;
+        var y_pos_10 = this.middlePointMass.cur.y * u - 80;
+        var x_pos_11 = this.middlePointMass.cur.x * u + 80;
+        var y_pos_11 = this.middlePointMass.cur.y * u - 80;
+
+        s.beginPath();
+        s.moveTo(x_pos_8, y_pos_8);
+        s.lineTo(x_pos_9, y_pos_9);
+        s.lineTo(x_pos_10, y_pos_10);
+        s.lineTo(x_pos_11, y_pos_11);        
+        s.stroke();
+        s.fill();
     }, this.draw = function(s, u) {
         var A, B, C;
-        this.drawBody(s, u), s.strokeStyle = '#000000', s.fillStyle = '#000000', s.save(), s.translate(this.middlePointMass.getXPos() * u, (this.middlePointMass.getYPos() - 0.35 * this.radius) * u), A = new Vector(0, -1), B = new Vector(0, 0), B.set(this.pointMasses[0].getPos()), B.sub(this.middlePointMass.getPos()), C = Math.acos(B.dotProd(A) / B.length()), 0 > B.getX() ? s.rotate(-C) : s.rotate(C), this.drawFace(s, u), s.restore()
+        // this.drawBody(s, u), 
+        this.drawCube(s, u),
+        s.strokeStyle = '#000000', 
+        s.fillStyle = '#FFFFFF', 
+        s.save(), 
+        s.translate(this.middlePointMass.getXPos() * u, (this.middlePointMass.getYPos() - 0.35 * this.radius) * u), 
+        A = new Vector(0, -1), 
+        B = new Vector(0, 0), 
+        B.set(this.pointMasses[0].getPos()), 
+        B.sub(this.middlePointMass.getPos()), 
+        C = Math.acos(B.dotProd(A) / B.length()), 
+        0 > B.getX() ? s.rotate(-C) : s.rotate(C), 
+        this.drawFace(s, u), s.restore()
     }
 }
 
 function BlobCollective(b, d, e, g) {
-    this.maxNum = g, this.numActive = 1, this.blobs = [], this.tmpForce = new Vector(0, 0), this.selectedBlob = null, this.blobs[0] = new Blob(b, d, 0.4, 8), this.split = function() {
+    this.maxNum = g, 
+    this.numActive = 1, 
+    this.blobs = [], 
+    this.tmpForce = new Vector(0, 0), 
+    this.selectedBlob = null, 
+    this.blobs[0] = new Blob(b, d, 0.4, 8), 
+    this.split = function() {
         var k, m = 0
             , n, o, q;
         if (this.numActive != this.maxNum) {
