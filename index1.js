@@ -193,6 +193,17 @@ function Blob(b, d, e, g) {
         return s += u, s % u
     }
     this.x = b, this.y = d, this.sticks = [], this.pointMasses = [], this.joints = [], this.middlePointMass, this.radius = e, this.drawFaceStyle = 1, this.drawEyeStyle = 1, this.selected = !1, g = 8;
+    var randomColor = [
+      "#FF5733",
+      "#C39BD3",
+      "#85C1E9",
+      "#76D7C4",
+      "#F7DC6F",
+      "#85929E",
+    ];
+    var random_idx = Math.floor(Math.random() * 6);
+    this.color = randomColor[random_idx];
+
     var m = 0.95
         , n = 1.05
         , o, q, r;
@@ -267,7 +278,7 @@ function Blob(b, d, e, g) {
     }, this.drawSimpleBody = function(s, u) {
         for (q = 0; q < this.sticks.length; q++) this.sticks[q].draw(s, u)
     }, this.changeColorCube = function (s, color) {
-        s.fillStyle = color;
+        s.fillStyle = this.color;
     }, this.drawCube = function (s, u) {
       var x_pos = this.middlePointMass.cur.x * u + this.radius * 145;
       var y_pos = this.middlePointMass.cur.y * u + this.radius * -180;
@@ -320,9 +331,9 @@ function Blob(b, d, e, g) {
       s.lineTo(x_pos_11, y_pos_11);
       s.stroke();
       s.fill();
-    }, this.draw = function(s, u, color) {
+    }, this.draw = function(s, u) {
         var A, B, C;
-        /*this.drawBody(s, u),*/ this.drawCube(s, u), this.changeColorCube(s, color), s.strokeStyle = '#000000',/*s.fillStyle = '#000000',*/ s.save(), s.translate(this.middlePointMass.getXPos() * u, (this.middlePointMass.getYPos() - 0.35 * this.radius) * u), A = new Vector(0, -1), B = new Vector(0, 0), B.set(this.pointMasses[0].getPos()), B.sub(this.middlePointMass.getPos()), C = Math.acos(B.dotProd(A) / B.length()), 0 > B.getX() ? s.rotate(-C) : s.rotate(C), this.drawFace(s, u), s.restore()
+        /*this.drawBody(s, u),*/ this.drawCube(s, u), this.changeColorCube(s), s.strokeStyle = '#000000',/*s.fillStyle = '#000000',*/ s.save(), s.translate(this.middlePointMass.getXPos() * u, (this.middlePointMass.getYPos() - 0.35 * this.radius) * u), A = new Vector(0, -1), B = new Vector(0, 0), B.set(this.pointMasses[0].getPos()), B.sub(this.middlePointMass.getPos()), C = Math.acos(B.dotProd(A) / B.length()), 0 > B.getX() ? s.rotate(-C) : s.rotate(C), this.drawFace(s, u), s.restore()
     }
 }
 
@@ -382,9 +393,9 @@ function BlobCollective(b, d, e, g) {
     }, this.addForce = function(k) {
         var l;
         for (l = 0; l < this.blobs.length; l++) null != this.blobs[l] && this.blobs[l] != this.selectedBlob && (this.tmpForce.setX(k.getX() * (0.75 * Math.random() + 0.25)), this.tmpForce.setY(k.getY() * (0.75 * Math.random() + 0.25)), this.blobs[l].addForce(this.tmpForce))
-    }, this.draw = function(k, l, color) {
+    }, this.draw = function(k, l) {
         var m;
-        for (m = 0; m < this.blobs.length; m++) null != this.blobs[m] && this.blobs[m].draw(k, l, color)
+        for (m = 0; m < this.blobs.length; m++) null != this.blobs[m] && this.blobs[m].draw(k, l)
     }
 }
 
@@ -397,17 +408,6 @@ var env, width = 600
     , blobColl, gravity, stopped, savedMouseCoords = null
     , selectOffset = null;
 
-///// Initial random color /////
-var randomColor = [
-  "#FF5733",
-  "#C39BD3",
-  "#85C1E9",
-  "#76D7C4",
-  "#F7DC6F",
-  "#85929E",
-];
-var random_idx = Math.floor(Math.random() * 6);
-
 function update() {
     null != savedMouseCoords && null != selectOffset && blobColl.selectedBlobMoveTo(savedMouseCoords.x - selectOffset.x, savedMouseCoords.y - selectOffset.y), blobColl.move(0.05), blobColl.sc(env), blobColl.setForce(gravity)
 }
@@ -416,7 +416,7 @@ function draw() {
     var b = document.getElementById('blob');
     if (null != b.getContext) {
         var d = b.getContext('2d');
-        d.clearRect(0, 0, width, height), env.draw(d, scaleFactor), blobColl.draw(d, scaleFactor, randomColor[random_idx])
+        d.clearRect(0, 0, width, height), env.draw(d, scaleFactor), blobColl.draw(d, scaleFactor)
     }
 }
 
