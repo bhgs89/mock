@@ -331,9 +331,74 @@ function Blob(b, d, e, g) {
       s.lineTo(x_pos_11, y_pos_11);
       s.stroke();
       s.fill();
+    }, this.drawBirdEyeView = function (s, u) {
+      var x_pos = this.middlePointMass.cur.x * u + this.radius;
+      var y_pos = this.middlePointMass.cur.y * u + this.radius * -175;
+
+      var x_pos_1 = this.middlePointMass.cur.x * u + this.radius * -200;
+      var y_pos_1 = this.middlePointMass.cur.y * u + this.radius * -75;
+
+      var x_pos_2 = this.middlePointMass.cur.x * u + this.radius;
+      var y_pos_2 = this.middlePointMass.cur.y * u + this.radius * 25;
+
+      var x_pos_3 = this.middlePointMass.cur.x * u + this.radius * 200;
+      var y_pos_3 = this.middlePointMass.cur.y * u + this.radius * -75;
+
+      s.beginPath();
+      s.moveTo(x_pos, y_pos);
+      s.lineTo(x_pos_1, y_pos_1);
+      s.lineTo(x_pos_2, y_pos_2);
+      s.lineTo(x_pos_3, y_pos_3);
+      s.closePath();
+      s.stroke();
+      s.fill();
+
+      var x_pos_4 = this.middlePointMass.cur.x * u + this.radius;
+      var y_pos_4 = this.middlePointMass.cur.y * u + this.radius * 25;
+
+      var x_pos_5 = this.middlePointMass.cur.x * u + this.radius;
+      var y_pos_5 = this.middlePointMass.cur.y * u + this.radius * 225;
+
+      var x_pos_6 = this.middlePointMass.cur.x * u + this.radius * -200;
+      var y_pos_6 = this.middlePointMass.cur.y * u + this.radius * 125;
+
+      var x_pos_7 = this.middlePointMass.cur.x * u + this.radius * -200;
+      var y_pos_7 = this.middlePointMass.cur.y * u + this.radius * -75;
+
+      var x_pos_8 = this.middlePointMass.cur.x * u + this.radius;
+      var y_pos_8 = this.middlePointMass.cur.y * u + this.radius * 25;
+
+      s.beginPath();
+      s.moveTo(x_pos_4, y_pos_4);
+      s.lineTo(x_pos_5, y_pos_5);
+      s.lineTo(x_pos_6, y_pos_6);
+      s.lineTo(x_pos_7, y_pos_7);
+      s.lineTo(x_pos_8, y_pos_8);
+      s.stroke();
+      s.fill();
+
+      var x_pos_9 = this.middlePointMass.cur.x * u + this.radius;
+      var y_pos_9 = this.middlePointMass.cur.y * u + this.radius * 225;
+
+      var x_pos_10 = this.middlePointMass.cur.x * u + this.radius * 200;
+      var y_pos_10 = this.middlePointMass.cur.y * u + this.radius * 125;
+
+      var x_pos_11 = this.middlePointMass.cur.x * u + this.radius * 200;
+      var y_pos_11 = this.middlePointMass.cur.y * u + this.radius * -75;
+
+      var x_pos_12 = this.middlePointMass.cur.x * u + this.radius;
+      var y_pos_12 = this.middlePointMass.cur.y * u + this.radius * 25;
+
+      s.beginPath();
+      s.moveTo(x_pos_9, y_pos_9);
+      s.lineTo(x_pos_10, y_pos_10);
+      s.lineTo(x_pos_11, y_pos_11);
+      s.lineTo(x_pos_12, y_pos_12);
+      s.stroke();
+      s.fill();
     }, this.draw = function(s, u) {
         var A, B, C;
-        /*this.drawBody(s, u),*/ this.drawCube(s, u), this.changeColorCube(s), s.strokeStyle = '#000000',/*s.fillStyle = '#000000',*/ s.save(), s.translate(this.middlePointMass.getXPos() * u, (this.middlePointMass.getYPos() - 0.35 * this.radius) * u), A = new Vector(0, -1), B = new Vector(0, 0), B.set(this.pointMasses[0].getPos()), B.sub(this.middlePointMass.getPos()), C = Math.acos(B.dotProd(A) / B.length()), 0 > B.getX() ? s.rotate(-C) : s.rotate(C), this.drawFace(s, u), s.restore()
+        /*this.drawBody(s, u), this.drawCube(s, u),*/this.drawBirdEyeView(s, u), this.changeColorCube(s), s.strokeStyle = '#000000',/*s.fillStyle = '#000000',*/ s.save(), s.translate(this.middlePointMass.getXPos() * u, (this.middlePointMass.getYPos() - 0.35 * this.radius) * u), A = new Vector(0, -1), B = new Vector(0, 0), B.set(this.pointMasses[0].getPos()), B.sub(this.middlePointMass.getPos()), C = Math.acos(B.dotProd(A) / B.length()), 0 > B.getX() ? s.rotate(-C) : s.rotate(C), this.drawFace(s, u), s.restore()
     }
 }
 
