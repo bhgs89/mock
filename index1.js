@@ -194,12 +194,12 @@ function Blob(b, d, e, g) {
     }
     this.x = b, this.y = d, this.sticks = [], this.pointMasses = [], this.joints = [], this.middlePointMass, this.radius = e, this.drawFaceStyle = 1, this.drawEyeStyle = 1, this.selected = !1, g = 8;
     var randomColor = [
-      "#FF5733",
-      "#C39BD3",
-      "#85C1E9",
-      "#76D7C4",
-      "#F7DC6F",
-      "#85929E",
+      "#FF00FF",
+      "#0066FF",
+      "#00CC33",
+      "#FFFF00",
+      "#FF6600",
+      "#FF0066",
     ];
     var random_idx = Math.floor(Math.random() * 6);
     this.color = randomColor[random_idx];
